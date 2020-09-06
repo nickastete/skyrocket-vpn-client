@@ -1,0 +1,16 @@
+version: '3'
+services:
+  tailscale_nginx:
+    container_name: tailscale_nginx
+    image: "nickastete/tailscale_nginx:latest"
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - TAILSCALE_AUTH=ADD_YOUR_KEY_HERE #TODO: Modify this line.
+      - USE_NGINX=true
+      - TAILSCALE_TAGS=tag:dev
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./log:/etc/nginx/log
+    ports:
+      - 8000:80
